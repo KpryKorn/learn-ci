@@ -6,9 +6,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: "20"
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
       - run: npm i
 
   lint:
@@ -16,17 +24,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: "20"
+
+      - name: Restore cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+      - run: npm ci
       - run: npm run lint
 
   test:
-    needs: [install-environment, lint]
+    needs: install-environment
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: "20"
+
+      - name: Restore cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+      - run: npm ci
       - run: npm run test
