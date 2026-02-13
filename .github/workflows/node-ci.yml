@@ -12,11 +12,21 @@ jobs:
       - run: npm i
 
   lint:
+    needs: install-environment
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
       - run: npm run lint
 
   test:
+    needs: [install-environment, lint]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
       - run: npm run test
