@@ -1,0 +1,22 @@
+name: Node.js CI learning
+run-name: Code Quality
+on: [push]
+jobs:
+  install-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm i
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - run: npm run lint
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: npm run test

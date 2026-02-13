@@ -1,0 +1,27 @@
+{
+  "name": "learn-ci",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/hello-world.js",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KpryKorn/learn-ci.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KpryKorn/learn-ci/issues"
+  },
+  "homepage": "https://github.com/KpryKorn/learn-ci#readme",
+  "description": "",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.0.0",
+    "jest": "^30.2.0"
+  }
+}
